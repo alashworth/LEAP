@@ -1,0 +1,29 @@
+[workspace]
+channels = ["https://prefix.dev/conda-forge", "https://prefix.dev/alashworth"]
+platforms = ["win-64"]
+preview = ["pixi-build"]                                  
+
+[package]
+name = "leapct"
+version = "1.24.0"
+
+[package.build]
+backend = { name = "pixi-build-cmake", version = "*" }
+
+[package.build.config]
+extra-args = ["-DCMAKE_BUILD_TYPE=Release -DLEAPCT_USE_CPU=ON"] 
+
+[package.host-dependencies]
+python = ">=3.11,<3.14"
+cmake = "*"
+
+[tasks]
+
+[dependencies]
+leapct = { path = "." }
+napari = ">=0.6.6,<0.7"
+matplotlib = ">=3.10.8,<4"
+imageio = ">=2.37.0,<3"
+numpy = ">=2.3.5,<3"
+scipy = ">=1.17.0,<2"
+xrayphysics = ">=1.2.1,<2"

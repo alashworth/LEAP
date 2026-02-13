@@ -279,7 +279,9 @@ bool filteredBackprojection::filterProjections(float* g, float* g_out, parameter
 				//printf("Error: currently offsetScan reconstruction only works for input data that resides on the CPU (but calculations can be done on CPU or GPU)\n");
 				//printf("Please submit a new feature request\n");
 				//return false;
+				#ifndef __USE_CPU
 				g = zeroPadForOffsetScan_GPU(g, params, g_out);
+				#endif
 			}
 			else
 			{
@@ -456,7 +458,9 @@ bool filteredBackprojection::execute(float* g, float* f, parameters* params, boo
 				//printf("Error: currently offsetScan reconstruction only works for input data that resides on the CPU (but calculations can be done on CPU or GPU)\n");
 				//printf("Please submit a new feature request\n");
 				//return false;
+				#ifndef __USE_CPU
 				g_pad = zeroPadForOffsetScan_GPU(g, params);
+				#endif
 			}
 			else
 			{
@@ -501,8 +505,12 @@ bool filteredBackprojection::execute(float* g, float* f, parameters* params, boo
 		{
 			if (data_on_cpu)
 				free(g_pad);
-			else
+			else {
+				#ifndef __USE_CPU
 				cudaFree(g_pad);
+				#endif
+			}
+
 		}
 
 		return retVal;

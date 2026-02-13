@@ -7,6 +7,7 @@
 # ctype tomographicModels class
 ################################################################################
 
+from pathlib import Path
 import ctypes
 import os
 import sys
@@ -112,7 +113,7 @@ class tomographicModels:
         
             libname = glob.glob(os.path.join(current_dir, "*leapct*.dll"))
             if len(libname) == 0:
-                fullPath = os.path.join(current_dir, 'libleapct.dll')
+                fullPath = str(Path(sys.prefix) / 'Library' / 'bin' / 'libleapct.dll')
                 fullPath_backup = os.path.join(current_dir, r'..\win_build\bin\Release\libleapct.dll')
             elif len(libname) == 1:
                 fullPath = libname[0]

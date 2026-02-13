@@ -7,16 +7,12 @@
 // main c++ header for ctype binding
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifdef WIN32
-    #pragma once
+#pragma once
 
-    #ifdef PROJECTOR_EXPORTS
-        #define PROJECTOR_API __declspec(dllexport)
-    #else
-        #define PROJECTOR_API __declspec(dllimport)
-    #endif
-#else
-    #define PROJECTOR_API
+#include "leapct_export.h"
+
+#ifndef PROJECTOR_API
+    #define PROJECTOR_API LEAPCT_EXPORT
 #endif
 
 
